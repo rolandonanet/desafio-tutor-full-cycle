@@ -10,7 +10,6 @@ import com.example.hotelReservation.adapter.mapper.controller.RoomControllerMapp
 import com.example.hotelReservation.application.usecase.*;
 import com.example.hotelReservation.entities.Hotel;
 import com.example.hotelReservation.entities.Room;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

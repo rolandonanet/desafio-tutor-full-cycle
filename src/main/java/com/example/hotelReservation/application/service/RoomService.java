@@ -1,7 +1,6 @@
 package com.example.hotelReservation.application.service;
 
 import com.example.hotelReservation.adapter.gateway.repository.HotelGatewayRepository;
-import com.example.hotelReservation.adapter.gateway.repository.RoomGatewayRepository;
 import com.example.hotelReservation.entities.Room;
 import com.example.hotelReservation.entities.Hotel;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +13,14 @@ import java.util.List;
 public class RoomService {
     private final HotelGatewayRepository hotelGatewayRepository;
     private final HotelService hotelService;
+
     public void createRoom(Long hotelId, Room room) {
         Hotel hotel = hotelService.getHotel(hotelId);
-        hotel.getRooms().add(room);
+
+        List<Room> rooms = hotel.getRooms();
+        rooms.add(room);
+
+        hotel.setRooms(rooms);
         hotelGatewayRepository.save(hotel);
     }
 
