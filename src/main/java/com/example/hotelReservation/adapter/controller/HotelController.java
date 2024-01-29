@@ -2,6 +2,7 @@ package com.example.hotelReservation.adapter.controller;
 
 
 import com.example.hotelReservation.adapter.dto.*;
+import com.example.hotelReservation.adapter.mapper.controller.BookControllerMapper;
 import com.example.hotelReservation.adapter.mapper.controller.HotelControllerMapper;
 import com.example.hotelReservation.adapter.mapper.controller.RoomControllerMapper;
 import com.example.hotelReservation.application.usecase.*;
@@ -20,6 +21,7 @@ public class HotelController {
 
     private final CreateHotelUseCase createHotelUseCase;
     private final CreateRoomUseCase createRoomUseCase;
+    private final CreateBookingUseCase createBookingUseCase;
     private final UpdateHotelUseCase updateHotelUseCase;
     private final UpdateRoomUseCase updateRoomUseCase;
     private final ListHotelsUseCase listHotelsUseCase;
@@ -40,8 +42,8 @@ public class HotelController {
 
     @PostMapping("/{hotelId}/room/{roomId}/book")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createRoom(@RequestBody BookRequestDTO request, @PathVariable Long hotelId, @PathVariable Long roomId){
-//        createRoomUseCase.execute(hotelId,RoomControllerMapper.map.roomRequestDtoToRoom(request));
+    public void createBooking(@RequestBody BookRequestDTO request, @PathVariable Long hotelId, @PathVariable Long roomId){
+        createBookingUseCase.execute(hotelId,roomId, BookControllerMapper.map.bookRequestDtoToBook(request));
     }
 
     @PutMapping("/{hotelId}")
