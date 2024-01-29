@@ -1,13 +1,20 @@
 package com.example.hotelReservation.infrastructure.persistence.entity;
 
-import com.example.hotelReservation.entities.RoomStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "room")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class RoomEntity {
 
@@ -19,11 +26,11 @@ public class RoomEntity {
 
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
-    private RoomStatus status;
-
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private HotelEntity hotel;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "room_id")
+    private List<BookEntity> bookings;
 }

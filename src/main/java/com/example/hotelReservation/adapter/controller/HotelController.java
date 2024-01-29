@@ -1,10 +1,7 @@
 package com.example.hotelReservation.adapter.controller;
 
 
-import com.example.hotelReservation.adapter.dto.HotelRequestDTO;
-import com.example.hotelReservation.adapter.dto.HotelResponseDTO;
-import com.example.hotelReservation.adapter.dto.RoomRequestDTO;
-import com.example.hotelReservation.adapter.dto.RoomResponseDTO;
+import com.example.hotelReservation.adapter.dto.*;
 import com.example.hotelReservation.adapter.mapper.controller.HotelControllerMapper;
 import com.example.hotelReservation.adapter.mapper.controller.RoomControllerMapper;
 import com.example.hotelReservation.application.usecase.*;
@@ -12,15 +9,13 @@ import com.example.hotelReservation.entities.Hotel;
 import com.example.hotelReservation.entities.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/hotel", consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/hotel")
 public class HotelController {
 
     private final CreateHotelUseCase createHotelUseCase;
@@ -41,6 +36,12 @@ public class HotelController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createRoom(@RequestBody RoomRequestDTO request, @PathVariable Long hotelId){
         createRoomUseCase.execute(hotelId,RoomControllerMapper.map.roomRequestDtoToRoom(request));
+    }
+
+    @PostMapping("/{hotelId}/room/{roomId}/book")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createRoom(@RequestBody BookRequestDTO request, @PathVariable Long hotelId, @PathVariable Long roomId){
+//        createRoomUseCase.execute(hotelId,RoomControllerMapper.map.roomRequestDtoToRoom(request));
     }
 
     @PutMapping("/{hotelId}")

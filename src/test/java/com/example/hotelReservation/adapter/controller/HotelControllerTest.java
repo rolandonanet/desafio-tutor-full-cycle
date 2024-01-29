@@ -164,7 +164,6 @@ class HotelControllerTest {
         return RoomRequestDTO.builder()
                 .number(101)
                 .price(BigDecimal.valueOf(100))
-                .status(RoomStatus.AVAILABLE)
                 .build();
     }
 
@@ -182,7 +181,6 @@ class HotelControllerTest {
                 .id(1L)
                 .number(101)
                 .price(BigDecimal.valueOf(100))
-                .status(RoomStatus.AVAILABLE)
                 .build();
     }
 

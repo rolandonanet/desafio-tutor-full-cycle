@@ -1,10 +1,8 @@
 package com.example.hotelReservation.application.service;
 
+import com.example.hotelReservation.adapter.gateway.messaging.RabbitMQProducerGateway;
 import com.example.hotelReservation.adapter.gateway.repository.HotelGatewayRepository;
-import com.example.hotelReservation.entities.Address;
-import com.example.hotelReservation.entities.Hotel;
-import com.example.hotelReservation.entities.Room;
-import com.example.hotelReservation.entities.RoomStatus;
+import com.example.hotelReservation.entities.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +30,9 @@ class HotelServiceTest {
 
     @Mock
     private HotelGatewayRepository hotelGatewayRepository;
+
+    @Mock
+    private RabbitMQProducerGateway rabbitMQProducerGateway;
 
     @InjectMocks
     private HotelService hotelService;
@@ -138,7 +140,15 @@ class HotelServiceTest {
                 .id(1L)
                 .number(101)
                 .price(BigDecimal.valueOf(100))
-                .status(RoomStatus.AVAILABLE)
+                .bookings(Collections.singletonList(buildSampleBooking()))
+                .build();
+    }
+
+    private Book buildSampleBooking() {
+        return Book.builder()
+                .id(1L)
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now().plusDays(3))
                 .build();
     }
 }

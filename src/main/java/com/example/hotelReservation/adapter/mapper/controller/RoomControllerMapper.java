@@ -1,6 +1,5 @@
 package com.example.hotelReservation.adapter.mapper.controller;
 
-import com.example.hotelReservation.adapter.dto.HotelRequestDTO;
 import com.example.hotelReservation.adapter.dto.HotelResponseDTO;
 import com.example.hotelReservation.adapter.dto.RoomRequestDTO;
 import com.example.hotelReservation.adapter.dto.RoomResponseDTO;

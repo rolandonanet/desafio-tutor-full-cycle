@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reservation {
+public class Book {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;

@@ -1,9 +1,16 @@
-FROM openjdk:17-oracle
+# Dockerfile for building the project
+FROM maven:3.8.4-openjdk-17-slim AS build
 
 WORKDIR /app
 
-# Copie o JAR da sua aplicação para o contêiner
-COPY ./desafio-tutor.jar /app/desafio-tutor.jar
+COPY . .
 
-# Comando para executar a aplicação
-CMD ["java", "-jar", "/app/desafio-tutor.jar"]
+RUN mvn clean package -DskipTests
+
+# Dockerfile for running the application
+FROM openjdk:17-oracle AS runtime
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar /app/app.jar
+
